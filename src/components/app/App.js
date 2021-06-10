@@ -27,7 +27,7 @@ const App = () => {
 
         return items.filter((item) => {
 
-            if (searchInput.length > 2) {
+            if (searchInput.length > 3) {
                 return item.title
                     .toLowerCase()
                     .indexOf(searchInput.toLowerCase()) > -1
