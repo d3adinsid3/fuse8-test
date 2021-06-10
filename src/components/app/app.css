@@ -90,6 +90,11 @@ h1 {
   font-weight: bold;
 }
 
+.price {
+  font-weight: bold;
+  display: inline;
+}
+
 button {
   font-weight: bold;
   border: solid LightGray 1px;
@@ -97,6 +102,32 @@ button {
   padding: 10px;
   width: 8em;
   background: none;
+}
+
+.img_container {
+  position: relative;
+}
+
+.img_container_in {
+  position: absolute;
+  right: -1px;
+  bottom: 0.01%;
+  background-color: #006A6A;
+  color: #FFFFFF;
+  font-weight: bold;
+  padding: 0.3em;
+  font-size: 0.8em;
+}
+
+.img_container_su {
+  position: absolute;
+  right: -1px;
+  bottom: 0.01%;
+  background-color: darkorange;
+  color: #FFFFFF;
+  font-weight: bold;
+  padding: 0.3em;
+  font-size: 0.8em;
 }
 
 /*# sourceMappingURL=app.css.map */

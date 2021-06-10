@@ -24,13 +24,15 @@ const App = () => {
     }, [])
 
     const search = (items, searchInput) => {
-        if (searchInput.length === 0) {
-            return items
-        }
+
         return items.filter((item) => {
-            return item.title
-                .toLowerCase()
-                .indexOf(searchInput.toLowerCase()) > -1
+
+            if (searchInput.length === 3) {
+                return item.title
+                    .toLowerCase()
+                    .indexOf(searchInput.toLowerCase()) > -1
+            } else return items
+
         })
     }
 
@@ -39,16 +41,13 @@ const App = () => {
     }
 
     const visibleItems = search(items, searchInput)
-
     return (
         <div className="container">
-            <header className="masthead clear">
-                <div className="centered">
+            <div className="centered">
 
-                    <h1> Our Latest Developments </h1>
+                <h1> Our Latest Developments </h1>
 
-                </div>
-            </header>
+            </div>
 
             <Filter onLabelChange={onLabelChange}/>
 
@@ -56,31 +55,37 @@ const App = () => {
 
                 <div className="centered">
 
-                        <section className="cards">
-                            {visibleItems.map(({id, title, price, address, type}) => {
-                                return (
-                            <article key={id} className="card">
-                                <a href= {`/details/${id}`}>
-                                    <picture className="thumbnail">
-                                        <img
-                                            src="https://cdn.shopify.com/s/files/1/0567/3873/files/54980-1200_large.jpg?v=1594835310"
-                                            alt="xexe)"/>
-                                    </picture>
-                                    <div className="card-content">
+                    <section className="cards">
+                        {visibleItems.map(({id, title, price, address, type}) => {
+                            return (
+                                <article key={id} className="card">
+                                    <a href={`/details/${id}`}>
 
-                                        <h2>{title}</h2>
-                                        <p>{address}</p>
-                                        <p>New Properties for Sale from {price} <br/>
-                                            Shared Ownership Available </p>
+                                        <div className='img_container'>
+                                            <img
+                                                src="https://cdn.shopify.com/s/files/1/0567/3873/files/54980-1200_large.jpg?v=1594835310"
+                                                alt="xexe)"/>
+                                            <div className={ type ==='IndependentLiving' ? "img_container_in" : "img_container_su" }>{type}</div>
 
-                                    </div>
-                                </a>
-                            </article>
-                                )
-                            })
-                            }
-                        </section>
-                    <button> see more > </button>
+                                        </div>
+
+
+                                        <div className="card-content">
+
+                                            <h2>{title}</h2>
+                                            <p>{address}</p>
+                                            <p>New Properties for Sale from <span
+                                                className='price'>£{price.toLocaleString()}</span> <br/>
+                                                Shared Ownership Available </p>
+
+                                        </div>
+                                    </a>
+                                </article>
+                            )
+                        })
+                        }
+                    </section>
+                    <button> see more ></button>
 
                 </div>
 
