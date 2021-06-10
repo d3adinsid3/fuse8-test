@@ -14,6 +14,7 @@ const getResource = async (url) => {
 const App = () => {
 
     const [items, setItems] = useState([])
+    const [searchInput, setSearchInput] = useState('')
 
     useEffect(() => {
         getResource(`https://603e38c548171b0017b2ecf7.mockapi.io/homes`).then((data) => {
@@ -22,9 +23,24 @@ const App = () => {
         )
     }, [])
 
+    const search = (items, searchInput) => {
+        if (searchInput.length === 0) {
+            return items
+        }
+        return items.filter((item) => {
+            return item.title
+                .toLowerCase()
+                .indexOf(searchInput.toLowerCase()) > -1
+        })
+    }
+
+    const onLabelChange = (searchInput) => {
+        setSearchInput(searchInput)
+    }
+
+    const visibleItems = search(items, searchInput)
+
     return (
-
-
         <div className="container">
             <header className="masthead clear">
                 <div className="centered">
@@ -34,17 +50,17 @@ const App = () => {
                 </div>
             </header>
 
-            <Filter/>
+            <Filter onLabelChange={onLabelChange}/>
 
             <main>
 
                 <div className="centered">
 
                         <section className="cards">
-                            {items.map(({id, title, price, address, type}) => {
+                            {visibleItems.map(({id, title, price, address, type}) => {
                                 return (
                             <article key={id} className="card">
-                                <a href="#">
+                                <a href= {`/details/${id}`}>
                                     <picture className="thumbnail">
                                         <img
                                             src="https://cdn.shopify.com/s/files/1/0567/3873/files/54980-1200_large.jpg?v=1594835310"
@@ -64,6 +80,7 @@ const App = () => {
                             })
                             }
                         </section>
+                    <button> see more > </button>
 
                 </div>
 
